@@ -1,21 +1,23 @@
 const YOUTUBE_API_KEY = 'AIzaSyD9ofCnqVYkpKdbM4a0iFdH3DP-LjEQVy8'; 
 
+let favoritos = [];
+
 window.searchVideos = function() {
   const searchTerm = document.getElementById('search-term').value;
-  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${searchTerm}&key=${YOUTUBE_API_KEY}`)
+  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${searchTerm}&key=${YOUTUBE_API_KEY}&maxResults=${12}`)
     .then(response => response.json())
     .then(data => {
       const videoList = document.getElementById('video-list');
       videoList.innerHTML = '';
       data.items.forEach(item => {
         const isFavorite = favoritos.some(fav => fav.id === item.id.videoId);
-        const starClass = isFavorite ? 'star star-filled' : 'star star-empty';
+        const starClass = isFavorite ? 'star star-filled' : 'star';
         const video = document.createElement('div');
         video.className = 'video';
         video.innerHTML = `
           <img src="${item.snippet.thumbnails.default.url}" alt="${item.snippet.title}">
           <h4>${item.snippet.title}</h4>
-          <button class="${starClass}" onclick="toggleFavorite('${item.id.videoId}', '${item.snippet.title}', '${item.snippet.thumbnails.default.url}')">⭐</button>
+          <button class="${starClass}" onclick="toggleFavorite('${item.id.videoId}', '${item.snippet.title}', '${item.snippet.thumbnails.default.url}')">aaaa</button>
         `;
         videoList.appendChild(video);
       });
@@ -53,6 +55,7 @@ window.toggleFavorite = function(id, title, thumbnail) {
     .then(response => response.json())
     .then(data => {
       console.log('Favoritos atualizados:', data);
+      document.getElementById('fav-count').textContent = favoritos.length;
       searchVideos(); 
     })
     .catch(error => console.error('Erro ao adicionar/remover favorito:', error));
@@ -63,6 +66,7 @@ function loadFavoritos() {
     .then(response => response.json())
     .then(data => {
       favoritos = data;
+      document.getElementById('fav-count').textContent = favoritos.length;
     })
     .catch(error => console.error('Erro ao carregar favoritos:', error));
 }

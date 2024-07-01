@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         favorite.innerHTML = `
           <img src="${item.thumbnail}" alt="${item.title}">
           <h4>${item.title}</h4>
-          <button class="star star-filled" onclick="removeFavorite('${item.id}')">⭐</button>
+          <button class="star star-filled" onclick="removeFavorite('${item.id}')">a</button>
         `;
         favoriteList.appendChild(favorite);
       });
