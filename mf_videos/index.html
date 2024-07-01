@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>MF_VIDEOS</title>
+</head>
+<body>
+  <div class="drawer">
+    <div class="nav-buttons">
+      <button onclick="window.location.href='http://localhost:3001'">VÍDEOS</button>
+      <button onclick="window.location.href='http://localhost:3001/favoritos'">FAVORITOS <span id="fav-count"></span></button>
+    </div>
+  </div>
+  <div class="search">
+    <input type="text" id="search-term" placeholder="Buscar vídeos...">
+    <button onclick="searchVideos()">Buscar</button>
+  </div>
+  <div class="videos" id="video-list"></div>
+  <script src="/public/app.js"></script>
+</body>
+</html>
