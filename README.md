@@ -8,31 +8,6 @@ MyTube Favorites é uma aplicação web que permite buscar vídeos no YouTube, m
 - Marcar vídeos como favoritos
 - Visualizar e reproduzir vídeos favoritos
 
-## Estrutura do Projeto
-
-
-mytube-favorites/
-│
-├── host/
-│   ├── Dockerfile
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-│
-├── mf_drawer/
-│   ├── Dockerfile
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-│
-├── mf_videos/
-│   ├── Dockerfile
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-│
-└── docker-compose.yml
-
 ## Pré-requisitos
 Docker
 Docker Compose
@@ -40,15 +15,16 @@ Chave de API do YouTube
 
 ## Configuração
 Clone o repositório:
-git clone https://github.com/mariimozzer/mytube-favorites
+```git clone https://github.com/mariimozzer/mytube-favorites´´´  
 cd mytube-favorites
 Adicione sua chave de API do YouTube no arquivo mf_videos/app.js:
 
 const API_KEY = 'YOUR_YOUTUBE_API_KEY';
 
 ## Build e inicie os containers:
+
 ```docker-compose build´´´  
-~~~bash docker-compose up ~~~
+```docker-compose up´´´ 
 - Acesse a aplicação em http://localhost:8080.
 
 ## Uso
@@ -59,4 +35,4 @@ const API_KEY = 'YOUR_YOUTUBE_API_KEY';
 ## Testes
 - Para executar os testes unitários, navegue até o diretório mf_videos e execute:
 
-npm test
+```npm test´´´ 

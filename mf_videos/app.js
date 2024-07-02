@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyD9ofCnqVYkpKdbM4a0iFdH3DP-LjEQVy8';
+ const API_KEY = ''; //SUA CHAVE AQUI
 let favorites = [];
 
 function handleKeyPress(event) {
