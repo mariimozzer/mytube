@@ -1,47 +1,82 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const app = express();
-const port = 3001;
-let favoritos = [];
+const API_KEY = 'AIzaSyD9ofCnqVYkpKdbM4a0iFdH3DP-LjEQVy8';
+let favorites = [];
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(__dirname));
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        searchVideos();
+    }
+}
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+function searchVideos() {
+    const query = document.getElementById('search').value;
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}&maxResults=${20}`)
+        .then(response => response.json())
+        .then(data => {
+            const videos = document.getElementById('videos');
+            videos.innerHTML = '';
+            data.items.forEach(item => {
+                const videoId = item.id.videoId;
+                const isFavorited = favorites.includes(videoId);
+                const videoElement = document.createElement('div');
+                videoElement.className = 'video';
+                videoElement.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                    <span class="star ${isFavorited ? 'favorited' : ''}" onclick="toggleFavorite('${videoId}')">&#9733;</span>
+                `;
+                videos.appendChild(videoElement);
+            });
+            updateFavoritesCount();
+        });
+}
 
-app.get('/favoritos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'favoritos.html'));
-});
+function toggleFavorite(videoId) {
+    const index = favorites.indexOf(videoId);
+    if (index > -1) {
+        favorites.splice(index, 1);
+    } else {
+        favorites.push(videoId);
+    }
+    updateFavorites();
+    updateFavoritesCount();
+}
 
-app.get('/favoritos/contagem', (req, res) => {
-  res.json({ count: favoritos.length });
-});
+function updateFavorites() {
+    document.querySelectorAll('.video .star').forEach(star => {
+        const videoId = star.previousElementSibling.src.split('/').pop();
+        if (favorites.includes(videoId)) {
+            star.classList.add('favorited');
+        } else {
+            star.classList.remove('favorited');
+        }
+    });
+}
 
-app.post('/favoritos', (req, res) => {
-  const video = req.body;
-  if (!favoritos.some(fav => fav.id === video.id)) {
-    favoritos.push(video);
-  } else {
-    favoritos = favoritos.filter(fav => fav.id !== video.id);
-  }
-  res.json(favoritos);
-});
+function updateFavoritesCount() {
+    window.parent.postMessage({ type: 'updateFavoritesCount', count: favorites.length }, '*');
+}
 
-app.get('/favoritos/lista', (req, res) => {
-  res.json(favoritos);
-});
+function showFavorites() {
+    const videos = document.getElementById('videos');
+    const searchContainer = document.getElementById('search-container');
+    searchContainer.style.display = 'none';
+    videos.innerHTML = '';
+    favorites.forEach(videoId => {
+        const videoElement = document.createElement('div');
+        videoElement.className = 'video';
+        videoElement.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+            <span class="star favorited" onclick="toggleFavorite('${videoId}')">&#9733;</span>
+        `;
+        videos.appendChild(videoElement);
+    });
+}
 
-app.delete('/favoritos/:id', (req, res) => {
-  const videoId = req.params.id;
-  favoritos = favoritos.filter(fav => fav.id !== videoId);
-  res.json(favoritos);
-});
-
-app.listen(port, () => {
-  console.log(`Aplicação MF_VIDEOS ouvindo em http://localhost:${port}`);
+window.addEventListener('message', event => {
+    if (event.data === 'favorites') {
+        showFavorites();
+    } else if (event.data === 'videos') {
+        const searchContainer = document.getElementById('search-container');
+        searchContainer.style.display = 'block';
+        searchVideos();
+    }
 });

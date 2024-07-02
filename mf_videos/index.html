@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-  <title>MyTube</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="drawer">
-    <div class="nav-buttons">
-      <button onclick="window.location.href='http://localhost:3001'">VÍDEOS</button>
-      <button onclick="window.location.href='http://localhost:3001/favoritos'">FAVORITOS <span id="fav-count"></span></button>
+    <div id="mf_videos">
+        <div id="search-container">
+            <input type="text" id="search" placeholder="Pesquisar" onkeypress="handleKeyPress(event)">
+            <button onclick="searchVideos()">Pesquisar</button>
+        </div>
+        <div id="videos"></div>
     </div>
-  </div>
-  <div class="search">
-    <input type="text" id="search-term" placeholder="Buscar vídeos...">
-    <button onclick="searchVideos()">Buscar</button>
-  </div>
-  <div class="videos" id="video-list"></div>
-  <div id="video-player" class="video-player">
-    <iframe id="player" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-    <button onclick="closePlayer()">Fechar</button>
-  </div>
-  <script src="/public/app.js"></script>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="videoPlayer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>

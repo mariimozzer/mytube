@@ -1,0 +1,11 @@
+#container {
+    display: flex;
+    height: 100vh;
+}
+#drawer {
+    width: 20%;
+    border-right: 1px solid #ccc;
+}
+#videos {
+    width: 80%;
+}

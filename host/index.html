@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation</title>
+    <title>MyTube Favorites</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="mf_drawer">
-        <button onclick="navigate('videos')">VÍDEOS</button>
-        <button onclick="navigate('favorites')">FAVORITOS <span id="favorites-count">0</span></button>
+    <div id="container">
+        <iframe src="http://localhost:8081" id="drawer" frameborder="0"></iframe>
+        <iframe src="http://localhost:8082" id="videos" frameborder="0"></iframe>
     </div>
     <script src="app.js"></script>
 </body>
