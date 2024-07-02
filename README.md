@@ -15,7 +15,7 @@ Chave de API do YouTube
 
 ## Configuração
 Clone o repositório:
-```git clone https://github.com/mariimozzer/mytube-favorites´´´  
+git clone https://github.com/mariimozzer/mytube-favorites 
 cd mytube-favorites
 Adicione sua chave de API do YouTube no arquivo mf_videos/app.js:
 
@@ -23,8 +23,8 @@ const API_KEY = 'YOUR_YOUTUBE_API_KEY';
 
 ## Build e inicie os containers:
 
-```docker-compose build´´´  
-```docker-compose up´´´ 
+docker-compose build  
+docker-compose up
 - Acesse a aplicação em http://localhost:8080.
 
 ## Uso
