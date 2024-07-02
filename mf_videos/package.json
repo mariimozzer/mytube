@@ -1,0 +1,13 @@
+{
+    "name": "mf_videos",
+    "version": "1.0.0",
+    "description": "Micro-frontend de vídeos",
+    "main": "app.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "devDependencies": {
+      "jest": "^27.0.0"
+    }
+  }
+  
