@@ -58,9 +58,14 @@ button {
   text-align: center;
 }
 
+.video img {
+  cursor: pointer;
+}
+
 .star {
   cursor: pointer;
   color: gray;
+  font-size: 24px; 
 }
 
 .star.star-filled {

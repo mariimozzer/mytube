@@ -15,12 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
         favorite.innerHTML = `
           <img src="${item.thumbnail}" alt="${item.title}">
           <h4>${item.title}</h4>
-          <button class="star star-filled" onclick="removeFavorite('${item.id}')">a</button>
+          <button class="star star-filled" onclick="removeFavorite('${item.id}')">aaa</button>
         `;
         favoriteList.appendChild(favorite);
       });
     })
     .catch(error => console.error('Erro ao buscar favoritos:', error));
+
+  fetch('/favoritos/contagem')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('fav-count').textContent = data.count;
+    })
+    .catch(error => console.error('Erro ao buscar a contagem de favoritos:', error));
 });
 
 function removeFavorite(id) {
