@@ -19,7 +19,7 @@ git clone https://github.com/mariimozzer/mytube-favorites
 cd mytube-favorites
 Adicione sua chave de API do YouTube no arquivo mf_videos/app.js:
 
-const API_KEY = 'YOUR_YOUTUBE_API_KEY';
+const API_KEY = 'SUA_CHAVE_AQUI';
 
 ## Build e inicie os containers:
 
@@ -34,5 +34,4 @@ docker-compose up
 
 ## Testes
 - Para executar os testes unitários, navegue até o diretório mf_videos e execute:
-
-```npm test´´´ 
+npm test 
