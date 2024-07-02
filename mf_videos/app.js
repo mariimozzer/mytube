@@ -1,4 +1,5 @@
- const API_KEY = ''; //SUA CHAVE AQUI
+const API_KEY = ''; //SUA CHAVE AQUI
+
 let favorites = [];
 
 function handleKeyPress(event) {
@@ -9,7 +10,7 @@ function handleKeyPress(event) {
 
 function searchVideos() {
   const query = document.getElementById('search').value;
-  return fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}`)
+  return fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}&maxResults=${20}`)
     .then(response => response.json())
     .then(data => {
       const videos = document.getElementById('videos');
